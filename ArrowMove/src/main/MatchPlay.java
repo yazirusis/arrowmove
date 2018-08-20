@@ -1,5 +1,7 @@
 package main;
 
+import java.util.Scanner;
+
 import game.Match;
 import game.controller.group.ControllerGroup;
 import game.rps.RPS;
@@ -13,12 +15,26 @@ public class MatchPlay {
 		}
 		ControllerGroup cg = new ControllerGroup(
 				new RPSRandom("rand1"),new RPSRandom("rand2"),new RPSRandom("rand3")
-				,new RPSRandom("rand4"),new RPSRandom("rand2"),new RPSRandom("rand2")
-				,new RPSRandom("rand2"),new RPSRandom("rand2"),new RPSRandom("rand2")
+				//,new RPSRandom("rand4"),new RPSRandom("rand2"),new RPSRandom("rand2")
+				//,new RPSRandom("rand2"),new RPSRandom("rand2"),new RPSRandom("rand2")
 				,new RPSRandom("rand2"));
 		Match match = new Match(new RPS(cg));
-		
-		match.play(num);
+
+		match.open();;
+
+		Scanner sc = new Scanner(System.in);
+		while(true) {
+			String s = sc.next();
+			if (s.equals("r")) {
+				match.next();
+			}else if (s.equals("u") ){
+				match.previous();
+			}else if (s.equals("e")){
+				break;
+			}
+			match.close();
+		}
+
 	}
 
 }

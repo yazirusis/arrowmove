@@ -1,8 +1,9 @@
 package game.data;
 
 import game.controller.Controller;
+import game.system.Game;
 
-public abstract class CommandData extends Data {
+public abstract class CommandData<T extends Game> extends Data {
 	protected Controller controller;
 
 	public CommandData(Controller controller) {
@@ -14,6 +15,13 @@ public abstract class CommandData extends Data {
 	public Controller getController() {
 		return controller;
 	}
+	
+	//実行
+	public abstract void execute(T game);
+	//もとに戻す
+	public abstract void undo(T game);
+	
+	
 	
 	
 

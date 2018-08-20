@@ -28,17 +28,21 @@ public class Match {
 	}
 
 	//ゲーム開始
-	protected void open() {
+	/*protected*/public void open() {
 		game.open();
 	}
 	
 	//更新
-	protected void next() {
+	/*protected*/public void next() {
 		game.next();
+	}
+	//終了処理
+	/*protected*/public void previous() {
+		game.previous();
 	}
 	
 	//終了処理
-	protected void close() {
+	/*protected*/public void close() {
 		game.close();
 	}
 	
