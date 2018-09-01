@@ -1,15 +1,12 @@
 package game.rps;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import game.controller.group.ControllerGroup;
-import game.data.CommandData;
 import game.data.Data;
 import game.data.TextCommandData;
 import game.rps.data.RPSCommandData;
-import game.rps.data.RPSStateData;
 import game.rps.shape.RPSResult;
 import game.rps.shape.Shape;
 import game.system.Game;
@@ -36,7 +33,7 @@ public class RPS extends Game<RPSCommandData> {
 
 	@Override
 	protected void gameOpen() {
-		
+
 		currentShape = new Shape[group.size()];
 		currentTime = 0;
 		shapeLists = new List[group.size()];
@@ -171,13 +168,12 @@ public class RPS extends Game<RPSCommandData> {
 	public void removeShapeList() {
 		for (int i=0; i < group.size();i++) {
 			//最後の値を消してcurrentSHapeに戻す
-			currentShape[i] = shapeLists[currentTime-1].remove(shapeLists[currentTime-1].size()-1);
+			currentShape[i] = shapeLists[currentTime-1].remove(0);
 		}
 	}
 	//勝数を戻す
 	public void undoJudge() {
 		removeShapeList();
-
 		//勝敗判定で勝数を戻す
 		RPSResult[] resurt = Shape.judgeAll(currentShape);
 		for (int i=0; i < group.size(); i++) {
@@ -194,7 +190,7 @@ public class RPS extends Game<RPSCommandData> {
 
 	@Override
 	protected void gameClose() {
-		
+
 	}
 	@Override
 	public RPSCommandData makeCommandData(TextCommandData data) {
@@ -231,10 +227,11 @@ public class RPS extends Game<RPSCommandData> {
 			}
 
 		}
+		System.out.println(isWinner?"の勝ち":"引き分け");
 		for (int i=0; i < group.size();i++) {
 			System.out.printf("%sさん、%d勝\n",group.getName(i),winNums[i]);
 		}
-		System.out.println(isWinner?"の勝ち":"引き分け");
+
 		//終了メッセージ
 		if (currentTime == gameTime) {
 			System.out.println("じゃんけんゲーム終了!!");
